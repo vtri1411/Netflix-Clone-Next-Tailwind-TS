@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { BellIcon, SearchIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
+import useAuth from '../hooks/useAuth'
 
 function Header() {
 	const [isScroll, setIsScroll] = useState(false)
+	const { logout } = useAuth()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -25,7 +27,7 @@ function Header() {
 		<header className={`${isScroll ? 'bg-[#141414]' : ''}`}>
 			<div className='flex items-center space-x-2 md:space-x-10'>
 				<img
-					src='https://rb.gy/ulxxee'
+					src='/images/logo.svg'
 					width={100}
 					height={100}
 					className='cursor-pointer object-contain'
@@ -44,13 +46,14 @@ function Header() {
 				<SearchIcon className='hidden h-6 w-6 sm:inline' />
 				<p className='hidden lg:inline'>Kids</p>
 				<BellIcon className='h-6 w-6' />
-				<Link href='/account'>
-					<img
-						src='https://rb.gy/g1pwyx'
-						alt=''
-						className='cursor-pointer rounded'
-					/>
-				</Link>
+				{/* <Link href='/account'> */}
+				<img
+					src='https://rb.gy/g1pwyx'
+					alt=''
+					className='cursor-pointer rounded'
+					onClick={logout}
+				/>
+				{/* </Link> */}
 			</div>
 		</header>
 	)
